@@ -6,8 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import rest.test.happilyy.dto.CheatCode;
 
@@ -23,15 +27,15 @@ import rest.test.happilyy.dto.CheatCode;
 //	);
 
 
-
-
+@Component
 public class CheatCodeRepository {
 	
-	JdbcTemplate template = getTemplate();
+	@Autowired
+	JdbcTemplate template;
 	
 	
 	
-	
+
 	public List<CheatCode> getAllCheatCodes(){
 		
 		
@@ -57,17 +61,15 @@ public class CheatCodeRepository {
 		
 	}
 	
-	private JdbcTemplate getTemplate() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cheat_code");
-        dataSource.setUsername("root");
-        dataSource.setPassword("Lightlinking21");
-        
-        template = new JdbcTemplate();
-        template.setDataSource(dataSource);
-        
-        return template;
+
+
+
+
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
 	}
+
+
+	
 
 }
