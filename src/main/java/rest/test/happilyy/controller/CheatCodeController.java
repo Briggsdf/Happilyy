@@ -19,7 +19,6 @@ public class CheatCodeController {
 
     @RequestMapping("/cheat_code")
     public List<CheatCode> greeting(@RequestParam(value="name", defaultValue="World") String name) {
-    	
         return repo.getAllCheatCodes();
     }
 }

@@ -1,5 +1,7 @@
 package rest.test.happilyy.repo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -9,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -33,33 +36,33 @@ public class CheatCodeRepository {
 	@Autowired
 	JdbcTemplate template;
 	
+	private class CheatCodeRowMapper implements RowMapper<CheatCode> {
+		public CheatCode mapRow(ResultSet results, int rowNumber)throws SQLException{  
+				CheatCode cheatCode = new CheatCode();
+				cheatCode.setCheatCodeId(results.getString("cheat_code_id"));
+				cheatCode.setCheatCodeInput(results.getString("cheat_code_input"));
+				cheatCode.setConsoleName(results.getString("console_name"));
+				cheatCode.setGameName(results.getString("game_name"));
+				cheatCode.setLastUpdated(results.getDate("Last_Updated"));
+				
+				return cheatCode;
+		   }
+		}
+	
 	
 	
 
 	public List<CheatCode> getAllCheatCodes(){
 		
-		
-		
 		String sql = "Select * from cheat_codes";
 		
-		List<Map<String, Object>> results = template.queryForList(sql);
-		List<CheatCode> cheats = new ArrayList<CheatCode>();
+		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper());		
 		
-		for(Map<String, Object> result: results) {
-			CheatCode cheatCode = new CheatCode();
-			cheatCode.setCheatCodeId((String)result.get("cheat_code_id"));
-			cheatCode.setCheatCodeInput((String)result.get("cheat_code_input"));
-			cheatCode.setConsoleName((String)result.get("console_name"));
-			cheatCode.setGameName((String)result.get("game_name"));
-			cheatCode.setLastUpdated((Date)result.get("Last_Updated"));
-			cheats.add(cheatCode);
-			
-		}
-		
-		return cheats;
+		return results;
 		
 		
 	}
+	
 	
 
 
