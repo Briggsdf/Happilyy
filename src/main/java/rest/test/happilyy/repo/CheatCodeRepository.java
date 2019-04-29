@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -36,7 +37,7 @@ import rest.test.happilyy.dto.CheatCode;
 public class CheatCodeRepository {
 	
 	@Autowired
-	JdbcTemplate template;
+	NamedParameterJdbcTemplate template;
 	
 	private class CheatCodeRowMapper implements RowMapper<CheatCode> {
 		public CheatCode mapRow(ResultSet results, int rowNumber)throws SQLException{  
@@ -73,7 +74,7 @@ public class CheatCodeRepository {
 		
 		source.addValue("consoleName", consoleName);
 		
-		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper(), source);
+		List<CheatCode> results = template.query(sql,source,new CheatCodeRowMapper());
 	
 		return results;
 		
@@ -87,7 +88,7 @@ public class CheatCodeRepository {
 		
 		source.addValue("gameName", gameName);
 		 
-		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper());
+		List<CheatCode> results = template.query(sql,source, new CheatCodeRowMapper());
 	
 		return results;
 
@@ -98,7 +99,7 @@ public class CheatCodeRepository {
 
 
 
-	public void setTemplate(JdbcTemplate template) {
+	public void setTemplate(NamedParameterJdbcTemplate template) {
 		this.template = template;
 	}
 
