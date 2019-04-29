@@ -20,9 +20,9 @@ public class JDBCConfigration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/cheat_code?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/cheat_code?serverTimezone=UTC");
 		dataSource.setUsername("root");
-		dataSource.setPassword("Lightlinking21");
+		dataSource.setPassword("2124Bjk!");
 
 		return dataSource;
 
@@ -47,6 +47,8 @@ public class JDBCConfigration {
 		
 		return cheatCodeRepository;
 	}
+	
+	
 
 
 }

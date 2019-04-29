@@ -16,6 +16,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+
 import rest.test.happilyy.dto.CheatCode;
 
 
@@ -46,12 +47,10 @@ public class CheatCodeRepository {
 				cheatCode.setLastUpdated(results.getDate("Last_Updated"));
 				
 				return cheatCode;
-		   }
 		}
+				
+	}
 	
-	
-	
-
 	public List<CheatCode> getAllCheatCodes(){
 		
 		String sql = "Select * from cheat_codes";
@@ -61,8 +60,32 @@ public class CheatCodeRepository {
 		return results;
 		
 		
-	}
+		}
 	
+
+
+
+	public List<CheatCode> getCheatCodeByConsole(){
+	
+		String sql = "SELECT * FROM cheat_codes WHERE console_name = 'PS4'";
+		 
+		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper());
+	
+		return results;
+		
+		}
+
+
+	public List<CheatCode> getCheatCodeByGame(){
+	
+		String sql = "SELECT * FROM cheat_codes WHERE game_name = 'GTA 2'";
+		 
+		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper());
+	
+		return results;
+
+
+		}
 	
 
 

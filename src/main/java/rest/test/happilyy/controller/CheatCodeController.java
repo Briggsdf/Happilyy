@@ -17,8 +17,21 @@ public class CheatCodeController {
 	CheatCodeRepository repo;
 
 
-    @RequestMapping("/cheat_code")
-    public List<CheatCode> greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    @RequestMapping("/cheat_code" )
+    public List<CheatCode> allCheatCodes(@RequestParam(value="name", defaultValue="World") String name) {
         return repo.getAllCheatCodes();
+        
+    }
+    
+    @RequestMapping("/console")
+    public List<CheatCode> console(@RequestParam(value="name", defaultValue="World") String name) {
+        return repo.getCheatCodeByConsole();
+        
+    }
+   
+    @RequestMapping("/game")
+    public List<CheatCode> game(@RequestParam(value="name", defaultValue="World") String name) {
+        return repo.getCheatCodeByGame();
+        
     }
 }
