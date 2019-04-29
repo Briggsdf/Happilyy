@@ -3,6 +3,7 @@ package rest.test.happilyy.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,15 +24,15 @@ public class CheatCodeController {
         
     }
     
-    @RequestMapping("/console")
-    public List<CheatCode> console(@RequestParam(value="name", defaultValue="World") String name) {
-        return repo.getCheatCodeByConsole();
+    @RequestMapping(value={"/console/{consoleName}"})
+    public List<CheatCode> console(@PathVariable String consoleName) {
+        return repo.getCheatCodeByConsole(consoleName);
         
     }
    
-    @RequestMapping("/game")
-    public List<CheatCode> game(@RequestParam(value="name", defaultValue="World") String name) {
-        return repo.getCheatCodeByGame();
+    @RequestMapping(value={"/game/{gameName}"})
+    public List<CheatCode> game(@PathVariable String gameName) {
+        return repo.getCheatCodeByGame(gameName);
         
     }
 }

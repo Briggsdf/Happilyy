@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -65,20 +66,26 @@ public class CheatCodeRepository {
 
 
 
-	public List<CheatCode> getCheatCodeByConsole(){
+	public List<CheatCode> getCheatCodeByConsole(String consoleName){
 	
-		String sql = "SELECT * FROM cheat_codes WHERE console_name = 'PS4'";
-		 
-		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper());
+		String sql = "SELECT * FROM cheat_codes WHERE console_name = :consoleName ";
+		MapSqlParameterSource source = new MapSqlParameterSource();
+		
+		source.addValue("consoleName", consoleName);
+		
+		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper(), source);
 	
 		return results;
 		
 		}
 
 
-	public List<CheatCode> getCheatCodeByGame(){
+	public List<CheatCode> getCheatCodeByGame(String gameName){
 	
-		String sql = "SELECT * FROM cheat_codes WHERE game_name = 'GTA 2'";
+		String sql = "SELECT * FROM cheat_codes WHERE game_name = :gameName";
+		MapSqlParameterSource source = new MapSqlParameterSource();
+		
+		source.addValue("gameName", gameName);
 		 
 		List<CheatCode> results = template.query(sql, new CheatCodeRowMapper());
 	

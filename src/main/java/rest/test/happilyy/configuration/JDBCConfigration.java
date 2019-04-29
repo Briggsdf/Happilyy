@@ -22,7 +22,7 @@ public class JDBCConfigration {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/cheat_code?serverTimezone=UTC");
 		dataSource.setUsername("root");
-		dataSource.setPassword("2124Bjk!");
+		dataSource.setPassword("Lightlinking21");
 
 		return dataSource;
 
