@@ -21,9 +21,9 @@ public class JDBCConfigration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/cheat_code?serverTimezone=UTC");
-		dataSource.setUsername("root");
-		dataSource.setPassword("Lightlinking21");
+		dataSource.setUrl("jdbc:mysql://bywoliopsog5nuvc:a20pzvsuk4nt70wu@ui0tj7jn8pyv9lp6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/w0qvlp2ad0mnaj1b?serverTimezone=UTC");
+		dataSource.setUsername("bywoliopsog5nuvc");
+		dataSource.setPassword("a20pzvsuk4nt70wu");
 
 		return dataSource;
 
