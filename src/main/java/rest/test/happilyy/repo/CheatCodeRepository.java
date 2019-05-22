@@ -67,12 +67,15 @@ public class CheatCodeRepository {
 
 
 
-	public List<CheatCode> getCheatCodeByConsole(String consoleName){
+	public List<CheatCode> getCheatCodeByConsoleAndGame(String consoleName, String gameName){
 	
-		String sql = "SELECT * FROM cheat_codes WHERE console_name = :consoleName ";
+		String sql = "SELECT * FROM cheat_codes WHERE console_name = :consoleName "
+				+ " AND WHERE game_name = :gameName";
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		
 		source.addValue("consoleName", consoleName);
+		source.addValue("gameName", gameName);
+
 		
 		List<CheatCode> results = template.query(sql,source,new CheatCodeRowMapper());
 	
@@ -94,6 +97,22 @@ public class CheatCodeRepository {
 
 
 		}
+	
+	public void addCheatCode(String cheatCodeId, String cheatCodeInput, String gameName, String consoleName) {
+		
+		String sql = "INSERT INTO cheat_codes " + 
+				"VALUES (:cheatCodeId, :cheatCodeInput, :gameName, :consoleName, SYSDATE());";
+		
+		MapSqlParameterSource source = new MapSqlParameterSource();
+		
+		source.addValue("cheatCodeId", cheatCodeId);
+		source.addValue("cheatCodeInput", cheatCodeInput);
+		source.addValue("consoleName", consoleName);
+		source.addValue("gameName", gameName);
+
+		template.update(sql, source);
+		
+	}
 	
 
 
