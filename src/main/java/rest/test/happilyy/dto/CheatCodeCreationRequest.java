@@ -12,4 +12,8 @@ public class CheatCodeCreationRequest {
 	
 	public String consoleName;
 	
+	public String feedBack;
+	
+	public String email;
+	
 }

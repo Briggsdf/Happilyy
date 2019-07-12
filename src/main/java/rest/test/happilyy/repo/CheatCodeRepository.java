@@ -114,7 +114,20 @@ public class CheatCodeRepository {
 		
 	}
 	
+	
+	public void addFeedEmail(String email, String feedBack) {
+		
+		String sql = "ALTER TABLE cheat_codes " + 
+				"ADD (:email, :feedBack);";
+		
+		MapSqlParameterSource source = new MapSqlParameterSource();
+		
+		source.addValue("email", email);
+		source.addValue("feedBack", feedBack);
 
+		template.update(sql, source);
+		
+	}
 
 
 

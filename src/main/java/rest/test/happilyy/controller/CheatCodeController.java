@@ -45,4 +45,10 @@ public class CheatCodeController {
     	repo.addCheatCode(request.cheatCodeId, request.cheatCodeInput, request.gameName, request.consoleName);
     }
     
+    @PutMapping(value={"/columns"})
+    public void addFeedEmail(@RequestBody CheatCodeCreationRequest request) {
+    	
+    	repo.addFeedEmail(request.email, request.feedBack);
+    }
+    
 }
